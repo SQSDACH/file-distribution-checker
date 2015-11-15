@@ -1,5 +1,5 @@
 /*******************************************************************************
- * The MIT License (MIT)  
+ * The MIT License (MIT)
  *
  * Copyright (c) 2015 SQS Software Quality Systems AG
  *
@@ -23,10 +23,12 @@
  *******************************************************************************/
 package com.sqs.tq.fdc;
 
+import static org.hamcrest.Matchers.endsWith;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.hasSize;
 import static org.junit.Assert.assertThat;
 
+import java.io.File;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
@@ -53,6 +55,7 @@ public class FileCollectorTest {
         List<FileData> data = fc.collect(fileInRoot);
         assertThat(data, hasSize(1));
         assertThat(data.get(0).name, equalTo("data.txt"));
+        assertThat(data.get(0).fqn, endsWith("/rootdir/data.txt".replace("/", File.separator)));
     }
 
     @Test
