@@ -150,7 +150,7 @@ public class CmdLineConfig {
            "  " + PROG_NAME + printOption(CmdLineOption.HELP) + hf.getNewLine() +
            "  " + PROG_NAME + printOption(CmdLineOption.DIR) + printOption(CmdLineOption.NAME) + hf.getNewLine() +
            "  " + PROG_NAME + printOption(CmdLineOption.FILE) + hf.getNewLine(),
-           "Analyse the distribution of a file a directory (recursive) or analyse a single file.",
+           "Analyze the distribution of a file a directory (recursive) or analyze a single file.",
            runOptions,
            2, 3,
            "Please report issues at https://github.com/sqs-dach/file-distribution-checker", false);

@@ -1,7 +1,7 @@
 apply plugin: 'java'
 apply plugin: 'eclipse'
 
-version="1.0-SNAPSHOT"
+version="1.0"
 sourceCompatibility = 1.7
 targetCompatibility = 1.7
 
@@ -11,23 +11,19 @@ repositories {
 
 dependencies {
     compile 'commons-cli:commons-cli:1.3.1'
-	compile 'com.fasterxml.jackson.core:jackson-core:2.6.3'
-	compile 'com.fasterxml.jackson.core:jackson-databind:2.6.3'
+    compile 'com.fasterxml.jackson.core:jackson-core:2.6.3'
+    compile 'com.fasterxml.jackson.core:jackson-databind:2.6.3'
 
     testCompile 'junit:junit:4.12'
     testCompile 'org.hamcrest:hamcrest-library:1.3'
 }
 
-task listJars << {
-    configurations.runtime.each { File file -> println file.name }
-}
-
 jar {
     manifest {
         attributes(
-        	'Main-Class': 'com.sqs.tq.fdc.Main',
-        	'Implementation-Title': 'FileDistributionChecker',
-        	'Implementation-Version': version)
+          'Main-Class': 'com.sqs.tq.fdc.Main',
+          'Implementation-Title': 'FileDistributionChecker',
+          'Implementation-Version': version)
     }
 
     from {
