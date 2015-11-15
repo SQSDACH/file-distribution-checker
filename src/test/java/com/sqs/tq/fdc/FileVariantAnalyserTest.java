@@ -40,9 +40,9 @@ public class FileVariantAnalyserTest {
     @Test
     public void shouldGenerateJsonOutput() throws Exception {
         List<FileData> fdata = new ArrayList<>();
-        fdata.add(new FileData("data.txt", "a", "1"));
-        fdata.add(new FileData("data.txt", "a/b", "1"));
-        fdata.add(new FileData("data.txt", "a/c", "2"));
+        fdata.add(new FileData("data.txt", "a/data.txt", "1"));
+        fdata.add(new FileData("data.txt", "a/b/data.txt", "1"));
+        fdata.add(new FileData("data.txt", "a/c/data.txt", "2"));
 
         FileVariantAnalyser fva = new FileVariantAnalyser();
         ObjectNode reportData = fva.analyse(fdata);

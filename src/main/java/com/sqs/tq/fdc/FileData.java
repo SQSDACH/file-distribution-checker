@@ -25,12 +25,12 @@ package com.sqs.tq.fdc;
 
 public class FileData {
     public final String name;
-    public final String path;
+    public final String fqn;
     public final String hash;
 
-    public FileData(String aName, String aPath, String aHash) {
+    public FileData(String aName, String aFullQualifiedName, String aHash) {
         name = aName;
-        path = aPath;
+        fqn = aFullQualifiedName;
         hash = aHash;
     }
 }

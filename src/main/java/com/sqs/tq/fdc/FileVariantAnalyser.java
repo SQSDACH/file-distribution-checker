@@ -106,7 +106,7 @@ public class FileVariantAnalyser implements Analyser {
             jgd.set("files", filesNode);
 
             for (FileData fd : gd.data) {
-                filesNode.add(String.format("%s%s%s", fd.path, "/", fd.name));
+                filesNode.add(fd.fqn);
             }
         }
         return result;
