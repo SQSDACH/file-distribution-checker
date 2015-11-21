@@ -67,7 +67,7 @@ public class RunConfig {
     }
 
     public boolean isErrorMode() {
-        return RunMode.ERROR.equals(cfgSource.configMode());
+        return RunMode.ERROR.equals(cfgSource.configMode()) || RunMode.UNINITIALIZED.equals(cfgSource.configMode());
     }
 
     public Path startDir() {
