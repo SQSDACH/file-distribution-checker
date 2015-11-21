@@ -27,7 +27,8 @@ import java.io.PrintStream;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-import com.sqs.tq.fdc.ConsoleReporter;
+import com.sqs.tq.fdc.PlainTextReporter;
+import com.sqs.tq.fdc.HtmlReporter;
 import com.sqs.tq.fdc.PlainFileFilter;
 import com.sqs.tq.fdc.Reporter;
 
@@ -91,7 +92,12 @@ public class RunConfig {
     }
 
     public Reporter reporter() {
-        return new ConsoleReporter(System.out);
+        switch (cfgSource.reporterType()) {
+        case HTML:
+            return new HtmlReporter();
+        default:
+            return new PlainTextReporter(System.out);
+        }
     }
 
 }

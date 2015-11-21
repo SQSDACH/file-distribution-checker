@@ -29,11 +29,11 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
-public class ConsoleReporter implements Reporter {
+public class PlainTextReporter implements Reporter {
 
     private final PrintStream out;
 
-    public ConsoleReporter(PrintStream out) {
+    public PlainTextReporter(PrintStream out) {
         this.out = out;
     }
 

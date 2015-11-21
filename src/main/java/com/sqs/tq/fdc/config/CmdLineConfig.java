@@ -181,4 +181,10 @@ public class CmdLineConfig {
         return cfgMode;
     }
 
+    public ReporterType reporterType() {
+        if (hasOption(CmdLineOption.HTML)) {
+            return ReporterType.HTML;
+        }
+        return ReporterType.TEXT;
+    }
 }

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * The MIT License (MIT)  
+ * The MIT License (MIT)
  *
  * Copyright (c) 2015 SQS Software Quality Systems AG
  *
@@ -23,15 +23,25 @@
  *******************************************************************************/
 package com.sqs.tq.fdc.config;
 
+import static java.nio.charset.StandardCharsets.UTF_8;
+import static org.hamcrest.CoreMatchers.containsString;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThat;
+
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
 
 import org.junit.Test;
 
 public class CmdLineConfigTest {
 
+    private static CmdLineConfig create(String args) {
+        return new CmdLineConfig(args.split(" "));
+    }
+
     @Test
     public void shouldAcceptHelpOption() {
-        CmdLineConfig cut = new CmdLineConfig("-h".split(" "));
+        CmdLineConfig cut = create("-h");
         cut.init();
 
         assertEquals("Help is requested", RunMode.HELP, cut.configMode());
@@ -39,10 +49,30 @@ public class CmdLineConfigTest {
 
     @Test
     public void shouldSetErrorModeWhenRequiredOptionIsMissed() {
-        CmdLineConfig cut = new CmdLineConfig("-d foo".split(" "));
+        CmdLineConfig cut = create("-d foo");
         cut.init();
 
         assertEquals("Should set error mode", RunMode.ERROR, cut.configMode());
+    }
+
+    @Test
+    public void shouldAcceptHtmlReport() {
+        CmdLineConfig cut = create("-f foo -html abc.ftl");
+        cut.init();
+
+        assertEquals("Should set analyse_file mode", RunMode.ANALYSE_FILE, cut.configMode());
+    }
+
+    @Test
+    public void shouldPrintHtmlInfo() throws Exception {
+        CmdLineConfig cut = create("-h");
+        cut.init();
+
+        ByteArrayOutputStream b = new ByteArrayOutputStream();
+        PrintStream ps = new PrintStream(b, true);
+        cut.showUsage(ps);
+        String result = b.toString(UTF_8.name());
+        assertThat(result, containsString("HTML report template"));
     }
 
 }

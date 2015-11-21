@@ -34,7 +34,8 @@ import java.io.PrintStream;
 
 import org.junit.Test;
 
-import com.sqs.tq.fdc.ConsoleReporter;
+import com.sqs.tq.fdc.PlainTextReporter;
+import com.sqs.tq.fdc.HtmlReporter;
 
 public class RunConfigTest {
 
@@ -139,6 +140,12 @@ public class RunConfigTest {
     @Test
     public void shouldRecognizeConsoleReporter() {
         RunConfig cut = create("-d foo -n bar");
-        assertTrue(cut.reporter() instanceof ConsoleReporter);
+        assertTrue(cut.reporter() instanceof PlainTextReporter);
+    }
+
+    @Test
+    public void shouldRecognizeHtmlReporter() {
+        RunConfig cut = create("-d foo -n bar -html template");
+        assertTrue(cut.reporter() instanceof HtmlReporter);
     }
 }

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * The MIT License (MIT)  
+ * The MIT License (MIT)
  *
  * Copyright (c) 2015 SQS Software Quality Systems AG
  *
@@ -28,6 +28,7 @@ public enum CmdLineOption {
 	DIR ("d", "dir" , "dir", "start dir for search"),
 	NAME("n", "name", "file name", "file name to search for"),
     FILE("f", "file", "file", "check this file"),
+    HTML("html", "template", "HTML report template to use"),
 	HELP("h", "help", "show usage message");
 	// @formatter:on
 
@@ -72,5 +73,4 @@ public enum CmdLineOption {
     public String argName() {
         return argName;
     }
-
 }
