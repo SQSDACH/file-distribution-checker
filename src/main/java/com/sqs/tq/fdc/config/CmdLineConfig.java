@@ -182,9 +182,14 @@ public class CmdLineConfig {
     }
 
     public ReporterType reporterType() {
-        if (hasOption(CmdLineOption.HTML)) {
-            return ReporterType.HTML;
+        if (hasOption(CmdLineOption.TMPL)) {
+            return ReporterType.TEMPLATE;
         }
         return ReporterType.TEXT;
     }
+
+    public String template() {
+        return getOptionValue(CmdLineOption.TMPL);
+    }
+
 }

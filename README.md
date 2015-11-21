@@ -54,6 +54,43 @@ Usage
     4) #1 times (md5: 92DB1E30FA190EAB0BA4E46FD0E058BC)
       /Users/thomo/.kanso/cache/dust/0.3.0/package/node_modules/dust/LICENSE
 
+### Format the output
+
+When running with the -t &lt;template&gt; parameter the output is rendered using the given template (using [Freemarker](http://freemarker.org)). The output is written to stdout.
+
+    $ ./FileDistributionChecker -d ~/.kanso -n LICENSE -t templates/simple.ftl > report.html
+
+Resulting report
+
+![Example HTML report](doc/htmlreport.png?raw=true "Example HTML report")
+
+#### Define your own template
+
+Use the small [template sample](src/main/dist/templates/simple.ftl) as a master for creating your own report templates.
+
+The underlying data structure is
+
+```json
+{
+  "name": "???",
+  "groups": [
+    {
+      "hash": "1",
+      "files": [
+        "a/data.txt",
+        "a/b/data.txt"
+      ]
+    },
+    {
+      "hash": "2",
+      "files": [
+        "a/c/data.txt"
+      ]
+    }
+  ]
+}
+```
+
 License
 -------
 

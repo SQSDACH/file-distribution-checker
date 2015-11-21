@@ -23,18 +23,49 @@
  *******************************************************************************/
 package com.sqs.tq.fdc;
 
+import java.io.IOException;
+import java.io.OutputStreamWriter;
+import java.io.PrintStream;
+import java.io.Writer;
+import java.nio.file.Path;
+import java.util.HashMap;
+import java.util.Map;
+
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
-public class HtmlReporter implements Reporter {
+import freemarker.template.Configuration;
+import freemarker.template.Template;
+import freemarker.template.TemplateException;
+
+public class TemplateReporter implements Reporter {
+
+    private final Writer writer;
+    private Template template;
+
+    public TemplateReporter(PrintStream ps) {
+        writer = new OutputStreamWriter(ps);
+    }
+
+    public void template(Path dir, String name) throws IOException {
+        Configuration cfg = new Configuration(Configuration.VERSION_2_3_23);
+        cfg.setDirectoryForTemplateLoading(dir.toFile());
+        template = cfg.getTemplate(name);
+    }
 
     @Override
     public void report(ObjectNode reportData) {
-        // TODO Auto-generated method stub
-
+        try {
+            Map<String, String> data = new HashMap<>();
+            data.put("data", reportData.toString());
+            template.process(data, writer);
+        } catch (TemplateException | IOException e) {
+            System.err.println("ERROR: " + e.getMessage());
+        }
     }
 
     @Override
     public void close() throws Exception {
+        writer.close();
     }
 
 }

@@ -28,7 +28,7 @@ public enum CmdLineOption {
 	DIR ("d", "dir" , "dir", "start dir for search"),
 	NAME("n", "name", "file name", "file name to search for"),
     FILE("f", "file", "file", "check this file"),
-    HTML("html", "template", "HTML report template to use"),
+    TMPL("t", "template", "template", "report template to use"),
 	HELP("h", "help", "show usage message");
 	// @formatter:on
 

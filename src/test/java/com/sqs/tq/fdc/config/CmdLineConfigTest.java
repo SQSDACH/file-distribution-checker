@@ -56,15 +56,15 @@ public class CmdLineConfigTest {
     }
 
     @Test
-    public void shouldAcceptHtmlReport() {
-        CmdLineConfig cut = create("-f foo -html abc.ftl");
+    public void shouldAcceptTemplateReport() {
+        CmdLineConfig cut = create("-f foo -t abc.ftl");
         cut.init();
 
         assertEquals("Should set analyse_file mode", RunMode.ANALYSE_FILE, cut.configMode());
     }
 
     @Test
-    public void shouldPrintHtmlInfo() throws Exception {
+    public void shouldPrintTemplateInfo() throws Exception {
         CmdLineConfig cut = create("-h");
         cut.init();
 
@@ -72,7 +72,7 @@ public class CmdLineConfigTest {
         PrintStream ps = new PrintStream(b, true);
         cut.showUsage(ps);
         String result = b.toString(UTF_8.name());
-        assertThat(result, containsString("HTML report template"));
+        assertThat(result, containsString("report template"));
     }
 
 }

@@ -23,13 +23,14 @@
  *******************************************************************************/
 package com.sqs.tq.fdc.config;
 
+import java.io.IOException;
 import java.io.PrintStream;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-import com.sqs.tq.fdc.PlainTextReporter;
-import com.sqs.tq.fdc.HtmlReporter;
+import com.sqs.tq.fdc.TemplateReporter;
 import com.sqs.tq.fdc.PlainFileFilter;
+import com.sqs.tq.fdc.PlainTextReporter;
 import com.sqs.tq.fdc.Reporter;
 
 public class RunConfig {
@@ -91,10 +92,13 @@ public class RunConfig {
         return Paths.get(cfgSource.fileName());
     }
 
-    public Reporter reporter() {
+    public Reporter reporter() throws IOException {
         switch (cfgSource.reporterType()) {
-        case HTML:
-            return new HtmlReporter();
+        case TEMPLATE:
+            TemplateReporter hr = new TemplateReporter(System.out);
+            Path p = Paths.get(cfgSource.template());
+            hr.template(p.getParent(), p.getFileName().toString());
+            return hr;
         default:
             return new PlainTextReporter(System.out);
         }

@@ -30,12 +30,14 @@ import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.io.PrintStream;
+import java.nio.file.Paths;
 
 import org.junit.Test;
 
 import com.sqs.tq.fdc.PlainTextReporter;
-import com.sqs.tq.fdc.HtmlReporter;
+import com.sqs.tq.fdc.TemplateReporter;
 
 public class RunConfigTest {
 
@@ -138,14 +140,15 @@ public class RunConfigTest {
     }
 
     @Test
-    public void shouldRecognizeConsoleReporter() {
+    public void shouldRecognizeConsoleReporter() throws IOException {
         RunConfig cut = create("-d foo -n bar");
         assertTrue(cut.reporter() instanceof PlainTextReporter);
     }
 
     @Test
-    public void shouldRecognizeHtmlReporter() {
-        RunConfig cut = create("-d foo -n bar -html template");
-        assertTrue(cut.reporter() instanceof HtmlReporter);
+    public void shouldRecognizeTemplateReporter() throws Exception {
+        RunConfig cut = create(
+                "-d foo -n bar -t " + Paths.get(getClass().getResource("/templates/plain.ftl").toURI()).toString());
+        assertTrue(cut.reporter() instanceof TemplateReporter);
     }
 }
