@@ -34,70 +34,70 @@ import java.io.PrintStream;
 
 import org.junit.Test;
 
-public class ConfigurationTest {
+public class RunConfigTest {
 
-    private Configuration create(String cmdline) {
-        return new Configuration.ConfigurationBuilder(new CmdLineConfig(cmdline != null ? cmdline.split(" ") : null))
+    private RunConfig create(String cmdline) {
+        return new RunConfig.ConfigurationBuilder(new CmdLineConfig(cmdline != null ? cmdline.split(" ") : null))
                 .build();
     }
 
     @Test
     public void shouldSetHelpModeWhenNoParameterGiven() {
-        Configuration cut = create(null);
+        RunConfig cut = create(null);
         assertTrue("Should recognize as help request", cut.isHelpMode());
     }
 
     @Test
     public void shouldRecognizeHelpRequest() {
-        Configuration cut = create("-h");
+        RunConfig cut = create("-h");
         assertTrue("Should recognize -h as help request", cut.isHelpMode());
     }
 
     @Test
     public void shouldRecognizeLongHelpRequest() {
-        Configuration cut = create("--help");
+        RunConfig cut = create("--help");
         assertTrue("Should recognize --help as help request", cut.isHelpMode());
     }
 
     @Test
     public void shouldRecognizeNoHelpRequest() {
-        Configuration cut = create("-x");
+        RunConfig cut = create("-x");
         assertFalse("-x is not a help request", cut.isHelpMode());
     }
 
     @Test
     public void shouldRecognizeRequiredOptionsForDirMode() {
-        Configuration cut = create("-d foo -n bar");
+        RunConfig cut = create("-d foo -n bar");
         assertTrue("Should recognize given required parameter", cut.isAnalyseDirMode());
     }
 
     @Test
     public void shouldRecognizeMissingRequiredOptionDir() {
-        Configuration cut = create("--name bar");
+        RunConfig cut = create("--name bar");
         assertFalse("Should recognize missing required parameter 'dir'", cut.isAnalyseDirMode());
     }
 
     @Test
     public void shouldRecognizeMissingRequiredOptionFile() {
-        Configuration cut = create("-d foo");
+        RunConfig cut = create("-d foo");
         assertFalse("Should recognize missing required parameter 'name'", cut.isAnalyseDirMode());
     }
 
     @Test
     public void shouldRecognizeRequiredOptionsForFileMode() {
-        Configuration cut = create("-f foo");
+        RunConfig cut = create("-f foo");
         assertTrue("Should recognize given required parameter", cut.isAnalyseFileMode());
     }
 
     @Test
     public void shouldSetErrorModeWhenRequiredOptionIsMissed() {
-        Configuration cut = create("-d foo");
+        RunConfig cut = create("-d foo");
         assertTrue("Should set error mode", cut.isErrorMode());
     }
 
     @Test
     public void shouldDeliverDir() {
-        Configuration cut = create("-d foo -n bar");
+        RunConfig cut = create("-d foo -n bar");
         assertEquals("foo", cut.startDir().toString());
     }
 
@@ -107,7 +107,7 @@ public class ConfigurationTest {
         ByteArrayOutputStream b = new ByteArrayOutputStream();
         PrintStream ps = new PrintStream(b, true);
 
-        Configuration cut = create("");
+        RunConfig cut = create("");
         cut.showUsage(ps);
 
         String result = b.toString(java.nio.charset.StandardCharsets.UTF_8.name());
@@ -127,7 +127,7 @@ public class ConfigurationTest {
         ByteArrayOutputStream b = new ByteArrayOutputStream();
         PrintStream ps = new PrintStream(b, true);
 
-        Configuration cut = create("");
+        RunConfig cut = create("");
         cut.showHelp(ps);
 
         String result = b.toString(java.nio.charset.StandardCharsets.UTF_8.name());

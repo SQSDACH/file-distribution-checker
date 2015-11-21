@@ -29,7 +29,7 @@ import java.nio.file.Paths;
 
 import com.sqs.tq.fdc.PlainFileFilter;
 
-public class Configuration {
+public class RunConfig {
 
     public static class ConfigurationBuilder {
 
@@ -39,16 +39,16 @@ public class Configuration {
             src = clc;
         }
 
-        public Configuration build() {
+        public RunConfig build() {
             src.init();
-            Configuration cfg = new Configuration(src);
+            RunConfig cfg = new RunConfig(src);
             return cfg;
         }
     }
 
     private final CmdLineConfig cfgSource;
 
-    private Configuration(CmdLineConfig src) {
+    private RunConfig(CmdLineConfig src) {
         cfgSource = src;
     }
 

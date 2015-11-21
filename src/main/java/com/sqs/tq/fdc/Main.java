@@ -28,14 +28,14 @@ import java.util.List;
 
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.sqs.tq.fdc.config.CmdLineConfig;
-import com.sqs.tq.fdc.config.Configuration;
+import com.sqs.tq.fdc.config.RunConfig;
 
 public class Main {
 
     public static void main(String[] args) {
         Main app = new Main();
 
-        Configuration clp = new Configuration.ConfigurationBuilder(new CmdLineConfig(args)).build();
+        RunConfig clp = new RunConfig.ConfigurationBuilder(new CmdLineConfig(args)).build();
 
         try {
             if (clp.isAnalyseDirMode()) {
