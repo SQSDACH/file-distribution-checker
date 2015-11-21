@@ -23,7 +23,7 @@
  *******************************************************************************/
 package com.sqs.tq.fdc.config;
 
-public enum ConfigMode {
+public enum RunMode {
     UNINITIALIZED, ERROR, HELP, ANALYSE_DIR, ANALYSE_FILE
 
 }

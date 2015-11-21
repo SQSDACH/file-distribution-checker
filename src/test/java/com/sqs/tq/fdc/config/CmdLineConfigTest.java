@@ -34,7 +34,7 @@ public class CmdLineConfigTest {
         CmdLineConfig cut = new CmdLineConfig("-h".split(" "));
         cut.init();
 
-        assertEquals("Help is requested", ConfigMode.HELP, cut.configMode());
+        assertEquals("Help is requested", RunMode.HELP, cut.configMode());
     }
 
     @Test
@@ -42,7 +42,7 @@ public class CmdLineConfigTest {
         CmdLineConfig cut = new CmdLineConfig("-d foo".split(" "));
         cut.init();
 
-        assertEquals("Should set error mode", ConfigMode.ERROR, cut.configMode());
+        assertEquals("Should set error mode", RunMode.ERROR, cut.configMode());
     }
 
 }

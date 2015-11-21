@@ -48,7 +48,7 @@ public class CmdLineConfig {
 
     private CommandLine cl;
 
-    private ConfigMode cfgMode = ConfigMode.UNINITIALIZED;
+    private RunMode cfgMode = RunMode.UNINITIALIZED;
 
     public CmdLineConfig(String[] args) {
         hlpOptions.addOption(createOption(CmdLineOption.HELP));
@@ -78,33 +78,33 @@ public class CmdLineConfig {
     public void init() {
         cl = parse(hlpOptions, true);
         if (isValid() && hasOption(CmdLineOption.HELP)) {
-            cfgMode = ConfigMode.HELP;
+            cfgMode = RunMode.HELP;
             return;
         }
 
         cl = parse(runOptions, false);
         if (isValid() && hasOption(CmdLineOption.DIR) && hasOption(CmdLineOption.NAME)) {
-            cfgMode = ConfigMode.ANALYSE_DIR;
+            cfgMode = RunMode.ANALYSE_DIR;
             return;
         }
 
         if (isValid() && hasOption(CmdLineOption.FILE)) {
-            cfgMode = ConfigMode.ANALYSE_FILE;
+            cfgMode = RunMode.ANALYSE_FILE;
             return;
         }
 
         if (isValid() && (theArgs == null || theArgs.length == 0)) {
-            cfgMode = ConfigMode.HELP;
+            cfgMode = RunMode.HELP;
             return;
         }
 
         if (isValid()) {
-            cfgMode = ConfigMode.ERROR;
+            cfgMode = RunMode.ERROR;
             error = "Missing required option, see usage.";
             return;
         }
 
-        cfgMode = ConfigMode.ERROR;
+        cfgMode = RunMode.ERROR;
     }
 
     private boolean isValid() {
@@ -177,7 +177,7 @@ public class CmdLineConfig {
         showUsage(out);
     }
 
-    public ConfigMode configMode() {
+    public RunMode configMode() {
         return cfgMode;
     }
 
