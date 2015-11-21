@@ -33,26 +33,48 @@ import com.sqs.tq.fdc.config.RunConfig;
 public class Main {
 
     public static void main(String[] args) {
-        Main app = new Main();
 
         RunConfig clp = new RunConfig.ConfigurationBuilder(new CmdLineConfig(args)).build();
 
-        try {
+        if (needAssistance(clp)) {
+            assist(clp);
+        } else if (canAnalyze(clp)) {
+            analyze(clp);
+        } else {
+            clp.showUsage(System.out);
+        }
+    }
+
+    private static void assist(RunConfig clp) {
+        if (clp.isHelpMode()) {
+            clp.showHelp(System.out);
+        } else {
+            clp.showUsage(System.out);
+        }
+    }
+
+    private static boolean needAssistance(RunConfig clp) {
+        return clp.isHelpMode() || clp.isErrorMode();
+    }
+
+    private static boolean canAnalyze(RunConfig clp) {
+        return clp.isAnalyseDirMode() || clp.isAnalyseFileMode();
+    }
+
+    private static void analyze(RunConfig clp) {
+        try (Reporter reporter = clp.reporter()) {
+            Main app = new Main();
             if (clp.isAnalyseDirMode()) {
-                app.run(clp.startDir(), clp.fileFilter(), clp.reporter());
-            } else if (clp.isAnalyseFileMode()) {
-                app.run(clp.file(), clp.reporter());
-            } else if (clp.isHelpMode()) {
-                clp.showHelp(System.out);
+                app.analyzeDirectory(clp.startDir(), clp.fileFilter(), reporter);
             } else {
-                clp.showUsage(System.out);
+                app.analyzeSingleFile(clp.file(), reporter);
             }
         } catch (Exception e) {
             System.err.println(e.getMessage());
         }
     }
 
-    public void run(Path root, PlainFileFilter ff, Reporter r) throws Exception {
+    public void analyzeDirectory(Path root, PlainFileFilter ff, Reporter r) throws Exception {
         Collector fc = new DirectoryCollector(ff);
         List<FileData> data = fc.collect(root);
 
@@ -61,10 +83,9 @@ public class Main {
         reportData.put("name", ff.name());
 
         r.report(reportData);
-        r.close();
     }
 
-    public void run(Path file, Reporter r) throws Exception {
+    public void analyzeSingleFile(Path file, Reporter r) throws Exception {
         Collector fc = new FileCollector();
         List<FileData> data = fc.collect(file);
 
@@ -73,6 +94,5 @@ public class Main {
         reportData.put("name", file.getFileName().toString());
 
         r.report(reportData);
-        r.close();
     }
 }
