@@ -52,12 +52,12 @@ public class Configuration {
         cfgSource = src;
     }
 
-    public boolean isRunDirMode() {
-        return ConfigMode.RUN_DIR.equals(cfgSource.configMode());
+    public boolean isAnalyseDirMode() {
+        return ConfigMode.ANALYSE_DIR.equals(cfgSource.configMode());
     }
 
-    public boolean isRunFileMode() {
-        return ConfigMode.RUN_FILE.equals(cfgSource.configMode());
+    public boolean isAnalyseFileMode() {
+        return ConfigMode.ANALYSE_FILE.equals(cfgSource.configMode());
     }
 
     public boolean isHelpMode() {

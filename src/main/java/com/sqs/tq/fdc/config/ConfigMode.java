@@ -24,6 +24,6 @@
 package com.sqs.tq.fdc.config;
 
 public enum ConfigMode {
-    UNINITIALIZED, ERROR, HELP, RUN_DIR, RUN_FILE
+    UNINITIALIZED, ERROR, HELP, ANALYSE_DIR, ANALYSE_FILE
 
 }

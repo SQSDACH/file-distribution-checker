@@ -38,9 +38,9 @@ public class Main {
         Configuration clp = new Configuration.ConfigurationBuilder(new CmdLineConfig(args)).build();
 
         try {
-            if (clp.isRunDirMode()) {
+            if (clp.isAnalyseDirMode()) {
                 app.run(clp.startDir(), clp.fileFilter());
-            } else if (clp.isRunFileMode()) {
+            } else if (clp.isAnalyseFileMode()) {
                 app.run(clp.file());
             } else if (clp.isHelpMode()) {
                 clp.showHelp(System.out);

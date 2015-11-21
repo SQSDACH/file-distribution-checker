@@ -68,25 +68,25 @@ public class ConfigurationTest {
     @Test
     public void shouldRecognizeRequiredOptionsForDirMode() {
         Configuration cut = create("-d foo -n bar");
-        assertTrue("Should recognize given required parameter", cut.isRunDirMode());
+        assertTrue("Should recognize given required parameter", cut.isAnalyseDirMode());
     }
 
     @Test
     public void shouldRecognizeMissingRequiredOptionDir() {
         Configuration cut = create("--name bar");
-        assertFalse("Should recognize missing required parameter 'dir'", cut.isRunDirMode());
+        assertFalse("Should recognize missing required parameter 'dir'", cut.isAnalyseDirMode());
     }
 
     @Test
     public void shouldRecognizeMissingRequiredOptionFile() {
         Configuration cut = create("-d foo");
-        assertFalse("Should recognize missing required parameter 'name'", cut.isRunDirMode());
+        assertFalse("Should recognize missing required parameter 'name'", cut.isAnalyseDirMode());
     }
 
     @Test
     public void shouldRecognizeRequiredOptionsForFileMode() {
         Configuration cut = create("-f foo");
-        assertTrue("Should recognize given required parameter", cut.isRunFileMode());
+        assertTrue("Should recognize given required parameter", cut.isAnalyseFileMode());
     }
 
     @Test

@@ -84,12 +84,12 @@ public class CmdLineConfig {
 
         cl = parse(runOptions, false);
         if (isValid() && hasOption(CmdLineOption.DIR) && hasOption(CmdLineOption.NAME)) {
-            cfgMode = ConfigMode.RUN_DIR;
+            cfgMode = ConfigMode.ANALYSE_DIR;
             return;
         }
 
         if (isValid() && hasOption(CmdLineOption.FILE)) {
-            cfgMode = ConfigMode.RUN_FILE;
+            cfgMode = ConfigMode.ANALYSE_FILE;
             return;
         }
 
