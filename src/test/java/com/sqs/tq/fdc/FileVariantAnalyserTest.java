@@ -44,7 +44,7 @@ public class FileVariantAnalyserTest {
         FileVariantAnalyser fva = new FileVariantAnalyser();
         ObjectNode reportData = fva.analyse(fdata);
 
-        assertEquals(Fixtures.expected, reportData);
+        assertEquals(Fixtures.ROOT_EXAMPLE, reportData);
     }
 
 }

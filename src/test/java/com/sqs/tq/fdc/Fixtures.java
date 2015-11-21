@@ -6,7 +6,7 @@ import com.sqs.tq.fdc.helper.JSONHelper;
 
 public class Fixtures {
     // @formatter:off
-    public static final JsonNode expected = build(""
+    public static final JsonNode ROOT_EXAMPLE = build(""
         + "{"
         + "  'name': '???',"
         + "  'groups': ["
