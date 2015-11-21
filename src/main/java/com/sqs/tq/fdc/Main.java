@@ -39,9 +39,9 @@ public class Main {
 
         try {
             if (clp.isAnalyseDirMode()) {
-                app.run(clp.startDir(), clp.fileFilter());
+                app.run(clp.startDir(), clp.fileFilter(), clp.reporter());
             } else if (clp.isAnalyseFileMode()) {
-                app.run(clp.file());
+                app.run(clp.file(), clp.reporter());
             } else if (clp.isHelpMode()) {
                 clp.showHelp(System.out);
             } else {
@@ -52,7 +52,7 @@ public class Main {
         }
     }
 
-    public void run(Path root, PlainFileFilter ff) throws Exception {
+    public void run(Path root, PlainFileFilter ff, Reporter r) throws Exception {
         Collector fc = new DirectoryCollector(ff);
         List<FileData> data = fc.collect(root);
 
@@ -60,12 +60,11 @@ public class Main {
         ObjectNode reportData = a.analyse(data);
         reportData.put("name", ff.name());
 
-        Reporter r = new ConsoleReporter(System.out);
         r.report(reportData);
         r.close();
     }
 
-    public void run(Path file) throws Exception {
+    public void run(Path file, Reporter r) throws Exception {
         Collector fc = new FileCollector();
         List<FileData> data = fc.collect(file);
 
@@ -73,7 +72,6 @@ public class Main {
         ObjectNode reportData = a.analyse(data);
         reportData.put("name", file.getFileName().toString());
 
-        Reporter r = new ConsoleReporter(System.out);
         r.report(reportData);
         r.close();
     }

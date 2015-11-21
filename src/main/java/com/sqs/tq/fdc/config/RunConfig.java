@@ -1,5 +1,5 @@
 /*******************************************************************************
- * The MIT License (MIT)  
+ * The MIT License (MIT)
  *
  * Copyright (c) 2015 SQS Software Quality Systems AG
  *
@@ -27,7 +27,9 @@ import java.io.PrintStream;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+import com.sqs.tq.fdc.ConsoleReporter;
 import com.sqs.tq.fdc.PlainFileFilter;
+import com.sqs.tq.fdc.Reporter;
 
 public class RunConfig {
 
@@ -86,6 +88,10 @@ public class RunConfig {
 
     public Path file() {
         return Paths.get(cfgSource.fileName());
+    }
+
+    public Reporter reporter() {
+        return new ConsoleReporter(System.out);
     }
 
 }
