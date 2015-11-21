@@ -30,10 +30,7 @@ import java.util.List;
 
 import org.junit.Test;
 
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
-import com.sqs.tq.fdc.helper.JSONHelper;
 
 public class FileVariantAnalyserTest {
 
@@ -47,31 +44,7 @@ public class FileVariantAnalyserTest {
         FileVariantAnalyser fva = new FileVariantAnalyser();
         ObjectNode reportData = fva.analyse(fdata);
 
-        ObjectMapper mapper = new ObjectMapper();
-        // @formatter:off
-        JsonNode expected = mapper.readTree(JSONHelper.sq2dq(""
-            + "{"
-            + "  'name': '???',"
-            + "  'groups': ["
-            + "    {"
-            + "      'hash': '1',"
-            + "      'files': ["
-            + "        'a/data.txt',"
-            + "        'a/b/data.txt'"
-            + "      ]"
-            + "    },"
-            + "    {"
-            + "      'hash': '2',"
-            + "      'files': ["
-            + "        'a/c/data.txt'"
-            + "      ]"
-            + "    }"
-            + "  ]"
-            + "}"
-        ));
-        // @formatter:on
-
-        assertEquals(expected, reportData);
+        assertEquals(Fixtures.expected, reportData);
     }
 
 }
